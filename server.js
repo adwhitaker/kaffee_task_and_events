@@ -6,6 +6,7 @@ const path = require('path');
 const auth = require('./auth/setup');
 const session = require('express-session');
 const googleAuth = require('./routes/googleAuth');
+const googleCalendar = require('./routes/googleCalendar');
 
 var app = express();
 
@@ -26,11 +27,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/auth/google', googleAuth);
+app.use('/calendar', googleCalendar);
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'public/views/index.html'));
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, 'public/views/index.html'));
+  } else {
+    res.redirect('/auth/google');
+  }
+
+});
+
+app.get('/test', function (req, res) {
+  res.send(req.user);
 });
 
 var server = app.listen(3000, function () {
