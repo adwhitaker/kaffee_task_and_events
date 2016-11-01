@@ -5,6 +5,7 @@ const GoogleStrategy = require('passport-google-oauth2');
 const path = require('path');
 const auth = require('./auth/setup');
 const session = require('express-session');
+const googleAuth = require('./routes/googleAuth');
 
 var app = express();
 
@@ -26,17 +27,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(passport.initialize());
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope:
-    ['https://www.googleapis.com/auth/plus.login',
-    'https://www.googleapis.com/auth/plus.profile.emails.read']}
-  ));
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/auth/google/failure',
-  }));
+app.use('/auth/google', googleAuth);
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'public/views/index.html'));
