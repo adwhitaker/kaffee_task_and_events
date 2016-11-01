@@ -2,5 +2,5 @@ node_modules
 public/vendors
 *.log
 .DS_Store
-client_secret.js
 quickstart.js
+client_secret.json
