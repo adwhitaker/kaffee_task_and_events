@@ -1,0 +1,32 @@
+body {
+  background-color: #414042;
+  color: #F25B53;
+}
+header {
+  display: flex;
+  justify-content: space-around;
+  background-color: #DBDECA;
+}
+.boxes {
+  display: flex;
+  justify-content: center;
+}
+.box {
+  background-color: #807D80;
+}
+nav {
+  background-color: #807D80;
+}
+ul {
+  display: flex;
+  list-style: none;
+}
+li:last-child {
+  margin-left: 10px;
+}
+.box {
+  height: 100px;
+  width: 100px;
+  border: 2px black solid;
+  margin: 2px;
+}

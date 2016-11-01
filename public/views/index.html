@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="tasksApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Kaffee</title>
+
+    <script src="vendors/angular.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-route.min.js" charset="utf-8"></script>
+
+    <script src="scripts/app.module.js" charset="utf-8"></script>
+    <script src="scripts/tasks.config.js" charset="utf-8"></script>
+    <script src="scripts/tasks.controller.js" charset="utf-8"></script>
+    <script src="scripts/daily.controller.js" charset="utf-8"></script>
+    <script src="scripts/weekly.controller.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="styles/resetCSS.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <base href="/" />
+  </head>
+  <body ng-controller="TasksController as tasks">
+    <header>
+    <h1>Kaffee</h1>
+
+    <div class="boxes">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+
+    <div class="logout">
+      <h3>logout</h3>
+      <h3><a href="/settings.html">Settings</a></h3>
+    </div>
+    </header>
+    <nav>
+      <ul>
+        <li><a href='/daily'>Daily Tasks</a></li>
+        <li><a href='/weekly'>Weekly Tasks</a></li>
+      </ul>
+    </nav>
+    <main>
+      <ng-view></ng-view>
+    </main>
+  </body>
+</html>
