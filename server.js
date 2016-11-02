@@ -7,6 +7,7 @@ const auth = require('./auth/setup');
 const session = require('express-session');
 const googleAuth = require('./routes/googleAuth');
 const googleCalendar = require('./routes/googleCalendar');
+const tasks = require('./routes/tasks');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(passport.session());
 
 app.use('/auth/google', googleAuth);
 app.use('/calendar', googleCalendar);
+app.use('/tasks', tasks);
 
 app.get('/', function (req, res) {
   if (req.isAuthenticated()) {

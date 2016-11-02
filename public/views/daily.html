@@ -1,1 +1,86 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add a Task</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="item">Task:</label>
+            <input type="text" class="form-control" id="item" ng-model="daily.item">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" ng-model="daily.dateCheckbox">Choose a date?</label>
+          </div>
+          <p class="form-group">
+            <label>Start Date</label>
+            <input type="text" ng-model="daily.startDate" class="form-control">
+          </p>
+          <div class="checkbox">
+            <label><input type="checkbox" ng-model="daily.singleDay">End Date</label>
+          </div>
+          <p class="form-group">
+            <label>End Date</label>
+            <input type="text" ng-model="daily.endDate" class="form-control">
+          </p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="daily.addTask(daily.item, daily.dateCheckbox, daily.startDate, daily.singleDay, daily.endDate)">Add Task</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>daily</h1>
+
+<div class="tasks">
+
+<div class="tasksHeader">
+
+<h2>Tasks</h2>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  Add Task
+</button>
+</div>
+
+<div class="tasksBody">
+  <div ng-repeat="item in daily.items">
+    <label><input type="checkbox">{{item.item}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">Edit</button>
+    <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
+
+      <div class="well well-lg">
+        <form>
+          <div class="form-group">
+            <label for="item">Task:</label>
+            <input type="text" class="form-control" id="item" ng-model="item.item">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox">Choose a date?</label>
+          </div>
+          <p class="form-group">
+            <label>Start Date</label>
+            <input type="text" ng-model="daily.format" class="form-control">
+          </p>
+          <div class="checkbox">
+            <label><input type="checkbox">Single Day</label>
+          </div>
+          <p class="form-group">
+            <label>End Date</label>
+            <input type="text" ng-model="daily.format" class="form-control">
+          </p>
+          <button type="submit" class="btn btn-default">Delete</button>
+          <button type="submit" class="btn btn-default">Update</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
