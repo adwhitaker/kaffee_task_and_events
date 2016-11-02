@@ -13,6 +13,7 @@ router.route('/:id')
 function getTasks(req, res) {
   knex.select()
       .from('task_items')
+      .orderBy('id')
       .then(function (data) {
         res.send(data);
       }).catch(function (err) {

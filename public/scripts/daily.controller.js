@@ -55,23 +55,15 @@ function DailyController($http) {
     });
   }
 
-  daily.addTask = function (item, dateCheckbox, startDate, singleDay, endDate) {
-    var taskItem = item;
-    var taskStartDate;
-    var taskEndDate;
+  daily.addTask = function (item, startDate, endDate) {
 
-    if (dateCheckbox) {
-      taskStartDate = moment(startDate, 'mm/dd/yyyy').format('L');
-      console.log('startdate', taskStartDate);
+    if (!endDate) {
+      endDate = startDate;
+      console.log('endDate', endDate);
     }
 
-    if (dateCheckbox && singleDay) {
-      taskEndDate = moment(endDate, 'mm/dd/yyyy').format('L');
-      console.log('enddate', taskEndDate);
-    }
-
-    console.log('Task:', taskItem, ', start date:', taskStartDate, ', end date', taskEndDate);
-    var tasksObject = { item: taskItem, start_date: taskStartDate, end_date: taskEndDate };
+    console.log('Task:', item, ', start date:', startDate, ', end date', endDate);
+    var tasksObject = { item: item, start_date: startDate, end_date: endDate };
 
     $http.post('/tasks', tasksObject)
          .then(function () {

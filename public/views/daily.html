@@ -15,24 +15,29 @@
             <input type="text" class="form-control" id="item" ng-model="daily.item">
           </div>
           <div class="checkbox">
-            <label><input type="checkbox" ng-model="daily.dateCheckbox">Choose a date?</label>
+            <label><input type="checkbox" ng-model="daily.dateCheckbox" aria-label="Tottle ngHide">Choose a Date</label>
           </div>
-          <p class="form-group">
-            <label>Start Date</label>
-            <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
-          </p>
-          <div class="checkbox">
-            <label><input type="checkbox" ng-model="daily.singleDay">End Date</label>
+          <div class="check-element animate-show" ng-show="daily.dateCheckbox">
+            <p class="form-group">
+              <label>Start Date</label>
+              <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
+            </p>
+            <div class="checkbox">
+              <label><input type="checkbox" ng-model="daily.multipleDays" aria-label="Tottle ngHide">Multiple Days</label>
+            </div>
+            <div class="check-element animate-show" ng-show="daily.multipleDays">
+              <p class="form-group">
+                <label>End Date</label>
+                <input type="text" ng-model="daily.endDate" class="form-control" placeholder="mm/dd/yyyy">
+              </p>
+            </div>
+
           </div>
-          <p class="form-group">
-            <label>End Date</label>
-            <input type="text" ng-model="daily.endDate" class="form-control" placeholder="mm/dd/yyyy">
-          </p>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="daily.addTask(daily.item, daily.dateCheckbox, daily.startDate, daily.singleDay, daily.endDate)">Add Task</button>
+        <button type="button" class="btn btn-primary" ng-click="daily.addTask(daily.item, daily.startDate, daily.endDate)">Add Task</button>
       </div>
     </div>
   </div>
@@ -42,45 +47,51 @@
 
 <div class="tasks">
 
-<div class="tasksHeader">
+  <div class="tasksHeader">
 
-<h2>Tasks</h2>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-  Add Task
-</button>
-</div>
+    <h2>Tasks</h2>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+      Add Task
+    </button>
+  </div>
 
-<div class="tasksBody">
-  <div class="task" ng-repeat="item in daily.items">
-    <input type="checkbox" ng-model="item.complete" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)"><label>{{item.item}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">Edit</button>
-    <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
+  <div class="tasksBody">
+    <div class="task" ng-repeat="item in daily.items">
+      <div class="taskBar">
+        <input type="checkbox" ng-model="item.complete" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)"><label>{{item.item}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">Edit</button>
+      </div>
+      <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
 
-      <div class="well well-lg">
-        <form>
-          <div class="form-group">
-            <label for="item">Task:</label>
-            <input type="text" class="form-control" id="item" ng-model="item.item">
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox">Choose a date?</label>
-          </div>
-          <p class="form-group">
-            <label>Start Date</label>
-            <input type="text" ng-model="item.start_date" class="form-control" placeholder="mm/dd/yyyy">
-          </p>
-          <div class="checkbox">
-            <label><input type="checkbox">Single Day</label>
-          </div>
-          <p class="form-group">
-            <label>End Date</label>
-            <input type="text" class="form-control" ng-model="item.end_date" placeholder="mm/dd/yyyy">
-          </p>
-          <button type="submit" class="btn btn-default" ng-click="daily.deleteTask(item.id)">Delete</button>
-          <button type="submit" class="btn btn-default" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)">Update</button>
-        </form>
+        <div class="well well-lg">
+          <form ng-init="item.name = item.item">
+            <div class="form-group">
+              <label for="item">Task:</label>
+              <input type="text" class="form-control" id="item" ng-model="item.name">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" ng-model="item.dateCheckbox" aria-label="Tottle ngHide">Edit Date</label>
+            </div>
+            <div class="check-element animate-show" ng-show="item.dateCheckbox">
+              <p class="form-group">
+                <label>Start Date</label>
+                <input type="text" ng-model="item.start_date" class="form-control" placeholder="mm/dd/yyyy">
+              </p>
+              <div class="checkbox">
+                <label><input type="checkbox" ng-model="item.multipleDays" aria-label="Tottle ngHide">Multiple Days</label>
+              </div>
+              <div class="check-element animate-show" ng-show="item.multipleDays">
+                <p class="form-group">
+                  <label>End Date</label>
+                  <input type="text" class="form-control" ng-model="item.end_date" placeholder="mm/dd/yyyy">
+                </p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="daily.deleteTask(item.id)">Delete</button>
+            <button type="submit" class="btn btn-default" ng-click="daily.updateTask(item.id, item.name, item.complete, item.start_date, item.end_date)">Update</button>
+          </form>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
+  </div>
 </div>
