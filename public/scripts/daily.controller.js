@@ -8,6 +8,13 @@ function DailyController($http) {
   daily.items = [];
 
   daily.updateTask = function (id, item, complete, startDate, endDate) {
+
+    if (complete) {
+      endDate = moment().format('L');
+    } else {
+      endDate = null;
+    }
+
     var taskUpdate = { item: item,
                         complete: complete,
                         start_date: startDate,
@@ -57,9 +64,8 @@ function DailyController($http) {
 
   daily.addTask = function (item, startDate, endDate) {
 
-    if (!endDate) {
-      endDate = startDate;
-      console.log('endDate', endDate);
+    if (!startDate) {
+      startDate = moment().format('L');
     }
 
     console.log('Task:', item, ', start date:', startDate, ', end date', endDate);

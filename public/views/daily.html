@@ -15,14 +15,14 @@
             <input type="text" class="form-control" id="item" ng-model="daily.item">
           </div>
           <div class="checkbox">
-            <label><input type="checkbox" ng-model="daily.dateCheckbox" aria-label="Tottle ngHide">Choose a Date</label>
+            <label><input type="checkbox" ng-model="daily.dateCheckbox" aria-label="Tottle ngHide">Choose a Start Date</label>
           </div>
           <div class="check-element animate-show" ng-show="daily.dateCheckbox">
             <p class="form-group">
-              <label>Start Date</label>
+              <label>Task Start Date</label>
               <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
             </p>
-            <div class="checkbox">
+            <!-- <div class="checkbox">
               <label><input type="checkbox" ng-model="daily.multipleDays" aria-label="Tottle ngHide">Multiple Days</label>
             </div>
             <div class="check-element animate-show" ng-show="daily.multipleDays">
@@ -30,7 +30,7 @@
                 <label>End Date</label>
                 <input type="text" ng-model="daily.endDate" class="form-control" placeholder="mm/dd/yyyy">
               </p>
-            </div>
+            </div> -->
 
           </div>
         </form>
@@ -74,10 +74,10 @@
             </div>
             <div class="check-element animate-show" ng-show="item.dateCheckbox">
               <p class="form-group">
-                <label>Start Date</label>
+                <label>Task Start Date</label>
                 <input type="text" ng-model="item.start_date" class="form-control" placeholder="mm/dd/yyyy">
               </p>
-              <div class="checkbox">
+              <!-- <div class="checkbox">
                 <label><input type="checkbox" ng-model="item.multipleDays" aria-label="Tottle ngHide">Multiple Days</label>
               </div>
               <div class="check-element animate-show" ng-show="item.multipleDays">
@@ -85,7 +85,7 @@
                   <label>End Date</label>
                   <input type="text" class="form-control" ng-model="item.end_date" placeholder="mm/dd/yyyy">
                 </p>
-              </div>
+              </div> -->
             </div>
             <button type="submit" class="btn btn-default" ng-click="daily.deleteTask(item.id)">Delete</button>
             <button type="submit" class="btn btn-default" ng-click="daily.updateTask(item.id, item.name, item.complete, item.start_date, item.end_date)">Update</button>

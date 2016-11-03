@@ -30,3 +30,43 @@ li:last-child {
   border: 2px black solid;
   margin: 2px;
 }
+main {
+  text-align: center;
+}
+main h1 {
+  text-align: left;
+}
+main form {
+  text-align: left;
+}
+
+.tasks {
+  text-align: left;
+  margin: auto;
+  width: 50%;
+}
+.tasksHeader h2 {
+  display: inline;
+}
+.tasksBody {
+  text-align: center;
+}
+.task {
+  margin: 2px;
+}
+.taskBar {
+  border: 2px solid #807D80;
+  border-radius: 10px;
+}
+.tasksBody input {
+  margin: 0 2px 0 2px;
+}
+.tasksBody label {
+  width: 75%;
+}
+.hidden {
+  display: none;
+}
+.show {
+
+}
