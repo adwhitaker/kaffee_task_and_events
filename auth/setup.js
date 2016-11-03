@@ -42,11 +42,12 @@ exports.setup = function () {
 // @TODO: is the return done right?
 function findOrCreate(googleID, accessToken, refreshToken, done) {
   // return new Promise(function (resolve, reject) {
-    console.log('googleID', googleID);
+  console.log('googleID', googleID);
 
-    User.findById(googleID, accessToken, refreshToken).then(function (user) {
+  User.findById(googleID, accessToken, refreshToken).then(function (user) {
       console.log('user', user);
       if (user) {
+        User.updateTokens(googleID, accessToken, refreshToken);
         return done(null, user);
       }
 

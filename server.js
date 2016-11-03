@@ -34,7 +34,7 @@ app.use('/auth/google', googleAuth);
 app.use('/calendar', googleCalendar);
 app.use('/tasks', tasks);
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
   if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
   } else {
