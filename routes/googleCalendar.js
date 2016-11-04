@@ -21,8 +21,6 @@ function getCalendarEvents(req, res) {
   var newMinTime = req.query.newMinTime;
   var newMaxTime = req.query.newMaxTime;
 
-  console.log('req.query', req.query, 'min', newMinTime, 'max', newMaxTime);
-
   oauth2Client.setCredentials({
     access_token: req.user.accesstoken,
     refresh_token: req.user.refreshtoken,
