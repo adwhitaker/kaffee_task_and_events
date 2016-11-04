@@ -95,3 +95,34 @@
     </div>
   </div>
 </div>
+
+<div class="events">
+  <div class="eventsHeader">
+
+    <h2>Events</h2>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+      Add Task
+    </button> -->
+  </div>
+  <div class="tasksBody">
+
+    <div class="task" ng-repeat="event in daily.events">
+      <div class="taskBar">
+
+        <label>{{event.summary}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">View Event</button>
+      </div>
+      <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
+
+        <div class="well well-lg">
+          <p>{{event.description}}</p>
+          <p>{{event.location}}</p>
+          <p>{{event.start.dateTime | date : 'fullDate'}}</p>
+          <p>{{event.start.dateTime | date : 'shortTime'}}</p>
+          <p>{{event.end.dateTime | date : 'shortTime'}}</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
