@@ -13,6 +13,7 @@ header {
 }
 .box {
   background-color: #807D80;
+  text-align: center;
 }
 nav {
   background-color: #807D80;
@@ -69,4 +70,20 @@ main form {
 }
 .show {
 
+}
+.events {
+  margin: auto;
+  width: 50%;
+}
+.eventsHeader {
+  text-align: left;
+}
+.weeklyTasksEvents {
+  display: flex;
+  justify-content: center;
+}
+.eventDay {
+  width: 15%;
+  height: 200px;
+  border: 2px solid blue;
 }
