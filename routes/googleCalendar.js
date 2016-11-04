@@ -18,16 +18,16 @@ var oauth2Client = new OAuth2(
 router.get('/', getCalendarEvents);
 
 function getCalendarEvents(req, res) {
-  var newMinTime = req.params.newMinTime;
-  console.log(req.body.params, req.body.newMinTime, req.params.newMinTime);
+  var newMinTime = req.query.newMinTime;
+  var newMaxTime = req.query.newMaxTime;
 
-  console.log('NEW MIN TIME:', newMinTime);
+  console.log('req.query', req.query, 'min', newMinTime, 'max', newMaxTime);
 
   oauth2Client.setCredentials({
     access_token: req.user.accesstoken,
     refresh_token: req.user.refreshtoken,
   });
-  listEvents(oauth2Client, newMinTime).then(function (futureEvents) {
+  listEvents(oauth2Client, newMinTime, newMaxTime).then(function (futureEvents) {
     res.send(futureEvents);
   }).catch(function (err) {
     console.log('err', err);
@@ -35,14 +35,15 @@ function getCalendarEvents(req, res) {
   });
 };
 
-function listEvents(auth, newMinTime) {
+function listEvents(auth, newMinTime, newMaxTime) {
   return new Promise(function (resolve, reject) {
 
     calendar.events.list({
       auth: auth,
       calendarId: 'primary',
       timeMin: newMinTime,
-      maxResults: 10,
+      timeMax: newMaxTime,
+      // maxResults: 10,
       singleEvents: true,
       orderBy: 'startTime',
     }, function (err, response) {
@@ -52,8 +53,6 @@ function listEvents(auth, newMinTime) {
       }
 
       var events = response.items;
-
-      // console.log('response.items', events);
 
       return resolve(events);
 

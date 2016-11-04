@@ -42,13 +42,11 @@ function DailyController($http) {
   };
 
   daily.getTasks = function () {
-    console.log('button clicked');
     $http.get('/tasks')
          .then(printTasks, errorCallback);
   };
 
   function printTasks(response) {
-    console.log('tasks get response', response.data);
     daily.items = response.data;
     daily.items.forEach(function (todo) {
       if (todo.start_date) {
@@ -81,6 +79,30 @@ function DailyController($http) {
   };
 
   daily.getTasks();
+
+  daily.events = [];
+
+  var momentTime = moment();
+  var newMinimumTime = momentTime.format();
+  var newMaxTime = momentTime.add(3, 'days');
+  newMaxTime = newMaxTime.format();
+  console.log('new max time', newMaxTime);
+
+  daily.getCalendarEvents = function (newMinimumTime, newMaxTime) {
+    $http.get('/calendar', {
+      params: {
+        newMinTime: newMinimumTime,
+        newMaxTime: newMaxTime,
+      },
+    }).then(printEvents, errorCallback);
+  };
+
+  function printEvents(response) {
+    daily.events = response.data;
+  };
+
+  daily.getCalendarEvents(newMinimumTime, newMaxTime);
+
 };
 
 function errorCallback(error) {
