@@ -17,6 +17,8 @@
     <script src="scripts/weekly.controller.js" charset="utf-8"></script>
     <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
     <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
+
+    <script src="scripts/tasks.service.js" charset="utf-8"></script>
     <script src="vendors/moment.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="styles/resetCSS.css">
@@ -32,11 +34,11 @@
     <h1>Kaffee</h1>
 
     <div class="boxes">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+      <div class="box" ng-repeat="item in tasks.boxTasks">
+        <p>{{item.item1}}</p>
+        <p>{{item.amount}}</p>
+        <p>{{item.item2}}</p>
+      </div>
     </div>
 
     <div class="logout">
