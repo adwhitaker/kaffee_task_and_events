@@ -1,1 +1,1 @@
-angular.module('tasksApp', ['ngRoute']);
+angular.module('tasksApp', ['ngRoute', 'ui.bootstrap', 'ngSanitize', 'ngAnimate']);
