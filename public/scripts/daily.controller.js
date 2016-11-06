@@ -6,7 +6,6 @@ function DailyController($http, tasksService) {
   var daily = this;
 
   daily.items = [];
-  // daily.tasksService = tasksService;
 
   daily.updateTask = function (id, item, complete, startDate, endDate) {
 
@@ -31,6 +30,7 @@ function DailyController($http, tasksService) {
         errorCallback);
   };
 
+  // delete tasks from DB
   daily.deleteTask = function (id) {
     tasksService.deleteTask(id)
                 .then(function () {
@@ -48,22 +48,20 @@ function DailyController($http, tasksService) {
     daily.items = response;
   }
 
-  daily.addTask = function (item, startDate, endDate) {
+  daily.addTask = function (item, startDate) {
 
     if (!startDate) {
       startDate = moment().format('L');
     }
 
-    console.log('Task:', item, ', start date:', startDate, ', end date', endDate);
-    var tasksObject = { item: item, start_date: startDate, end_date: endDate };
+    tasksService.addTask(item, startDate)
+                .then(function () {
+                  daily.getTasks();
+                  daily.item = '';
+                  daily.item = '';
+                  daily.startDate = '';
+                });
 
-    $http.post('/tasks', tasksObject)
-         .then(function () {
-          console.log('success');
-          daily.getTasks();
-        },
-
-         errorCallback);
   };
 
   daily.getTasks();

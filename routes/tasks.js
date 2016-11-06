@@ -27,7 +27,7 @@ function postTask(req, res) {
   var complete = false;
   var item = req.body.item;
   var startDate = req.body.start_date;
-  var endDate = req.body.end_date;
+  var endDate = null;
 
   var insertRequest = { item: item,
                         complete: complete,

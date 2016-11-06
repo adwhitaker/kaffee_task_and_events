@@ -9,7 +9,7 @@
         <h4 class="modal-title" id="myModalLabel">Add a Task</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form class="addTaskForm" ng-model="daily.addTaskForm">
           <div class="form-group">
             <label for="item">Task:</label>
             <input type="text" class="form-control" id="item" ng-model="daily.item">
@@ -22,15 +22,6 @@
               <label>Task Start Date</label>
               <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
             </p>
-            <!-- <div class="checkbox">
-              <label><input type="checkbox" ng-model="daily.multipleDays" aria-label="Tottle ngHide">Multiple Days</label>
-            </div>
-            <div class="check-element animate-show" ng-show="daily.multipleDays">
-              <p class="form-group">
-                <label>End Date</label>
-                <input type="text" ng-model="daily.endDate" class="form-control" placeholder="mm/dd/yyyy">
-              </p>
-            </div> -->
 
           </div>
         </form>

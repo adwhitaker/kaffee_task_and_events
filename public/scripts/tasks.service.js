@@ -21,6 +21,21 @@ function tasksService($http) {
     return todos;
   } // end of get tasks
 
+  // add a new task to the DB
+  this.addTask = function (item, startDate) {
+      var tasksObject = { item: item,
+                        start_date: startDate,
+                      };
+
+      return $http.post('/tasks', tasksObject)
+         .then(function () {
+                console.log('success');
+                return;
+              },
+
+           errorCallback);
+    };
+
   // delete tasks
   this.deleteTask = function (id) {
     return $http.delete('/tasks/' + id)
@@ -29,7 +44,7 @@ function tasksService($http) {
       },
 
         errorCallback);
-  };
+  };;
 };
 
 // callback error function
