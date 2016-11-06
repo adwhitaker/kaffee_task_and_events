@@ -32,14 +32,10 @@ function DailyController($http, tasksService) {
   };
 
   daily.deleteTask = function (id) {
-    console.log('id', id);
-    $http.delete('/tasks/' + id)
-    .then(function () {
-        console.log('success');
-        daily.getTasks();
-      },
-
-        errorCallback);
+    tasksService.deleteTask(id)
+                .then(function () {
+                  daily.getTasks();
+                });
   };
 
   // gets tasks from DB

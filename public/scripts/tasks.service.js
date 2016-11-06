@@ -3,6 +3,7 @@ angular.module('tasksApp')
 
 function tasksService($http) {
 
+  // get tasks
   this.getTasks = function () {
     return $http.get('/tasks')
          .then(changeTasksDate, errorCallback);
@@ -16,11 +17,22 @@ function tasksService($http) {
       }
 
     });
-    console.log(todos);
+
     return todos;
-  }
+  } // end of get tasks
+
+  // delete tasks
+  this.deleteTask = function (id) {
+    return $http.delete('/tasks/' + id)
+    .then(function () {
+        return;
+      },
+
+        errorCallback);
+  };
 };
 
+// callback error function
 function errorCallback(error) {
   console.log('error making http request', error);
 };
