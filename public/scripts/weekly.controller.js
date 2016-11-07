@@ -8,13 +8,13 @@ function WeeklyController($http, eventsService) {
   weekly.days = eventsService.week;
 
   weekly.getCalendarEvents = function () {
-    var newMoment = moment();
-    eventsService.getCalendarEvents(newMoment)
+    // var newMoment = moment();
+    eventsService.getCalendarEvents()
       .then(function (response) {
         console.log('respnse', response);
       })
   }
 
-  weekly.getCalendarEvents();
+  // weekly.getCalendarEvents();
 
 };

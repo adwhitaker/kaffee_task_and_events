@@ -1,7 +1,7 @@
 angular.module('tasksApp')
        .controller('DailyController', DailyController);
 
-function DailyController($http, tasksService) {
+function DailyController($http, tasksService, eventsService) {
   console.log('DailyController loaded');
   var daily = this;
 
@@ -52,30 +52,7 @@ function DailyController($http, tasksService) {
 
   daily.getTasks();
 
-  daily.events = [];
+  var today = moment().format('dddd').toLowerCase();
+  daily.events = eventsService.week[today];
 
-  var momentTime = moment();
-  var newMinimumTime = momentTime.format();
-  var newMaxTime = momentTime.add(1, 'days');
-  newMaxTime = newMaxTime.format();
-
-  daily.getCalendarEvents = function (newMinimumTime, newMaxTime) {
-    $http.get('/calendar', {
-      params: {
-        newMinTime: newMinimumTime,
-        newMaxTime: newMaxTime,
-      },
-    }).then(printEvents, errorCallback);
-  };
-
-  function printEvents(response) {
-    daily.events = response.data;
-  };
-
-  daily.getCalendarEvents(newMinimumTime, newMaxTime);
-
-};
-
-function errorCallback(error) {
-  console.log('error making http request', error);
 };
