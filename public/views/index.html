@@ -15,9 +15,11 @@
     <script src="scripts/tasks.controller.js" charset="utf-8"></script>
     <script src="scripts/daily.controller.js" charset="utf-8"></script>
     <script src="scripts/weekly.controller.js" charset="utf-8"></script>
+    <script src="scripts/settings.controller.js" charset="utf-8"></script>
     <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
     <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
 
+    <script src="scripts/everydayTasks.service.js" charset="utf-8"></script>
     <script src="scripts/tasks.service.js" charset="utf-8"></script>
     <script src="scripts/events.service.js" charset="utf-8"></script>
     <script src="vendors/moment.js" charset="utf-8"></script>
@@ -35,7 +37,7 @@
     <h1>Kaffee</h1>
 
     <div class="boxes">
-      <div class="box" ng-repeat="item in tasks.boxTasks">
+      <div class="box" ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks">
         <p>{{item.item1}}</p>
         <p>{{item.amount}}</p>
         <p>{{item.item2}}</p>
@@ -43,7 +45,7 @@
     </div>
 
     <div class="logout">
-      <h3>logout</h3>
+      <h3><a ng-click="tasks.logout()">Logout</a></h3>
       <h3><a href="/settings">Settings</a></h3>
     </div>
     </header>

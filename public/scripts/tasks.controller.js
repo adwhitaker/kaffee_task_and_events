@@ -1,26 +1,17 @@
 angular.module('tasksApp')
        .controller('TasksController', TasksController);
 
-function TasksController($http, tasksService, eventsService) {
+function TasksController($http, tasksService, eventsService, everyDayTasksService) {
   console.log('TasksController loaded');
   var tasks = this;
 
-  tasks.boxTasks = [];
+  tasks.boxTasks = everyDayTasksService;
 
-  tasks.getEverydayTasks = function () {
-    $http.get('/dailytasks').then(printEverydayTasks, errorCallback);
-  };
-
-  function printEverydayTasks(response) {
-    tasks.boxTasks = response.data;
-
+  tasks.logout = function () {
+    window.location = '/logout';
   };
 
   tasksService.getTasks();
   eventsService.getCalendarEvents();
-  tasks.getEverydayTasks();
-};
-
-function errorCallback(error) {
-  console.log('error making http request', error);
+  everyDayTasksService.getEveryDayTasks();
 };
