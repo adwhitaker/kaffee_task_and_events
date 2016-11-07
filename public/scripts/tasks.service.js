@@ -6,8 +6,15 @@ function tasksService($http) {
 
   this.items = [];
 
+  var items = {
+    tasks: [],
+  };
+
+  this.taskItems = items;
+
   // get tasks from the DB
   this.getTasks = function () {
+
     return $http.get('/tasks')
          .then(changeTasksDate, errorCallback);
   };
@@ -21,8 +28,7 @@ function tasksService($http) {
 
     });
 
-    that.items = todos;
-
+    items.tasks = todos;
     return;
   };
 

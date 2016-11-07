@@ -6,7 +6,7 @@ function DailyController($http, tasksService, eventsService) {
   var daily = this;
 
   // tasks to be displayed on the DOM
-  this.items = tasksService.items;
+  this.items = tasksService;
 
   // events to be displayed on the DOM
   var today = moment().format('dddd').toLowerCase();
@@ -38,7 +38,7 @@ function DailyController($http, tasksService, eventsService) {
   daily.updateTask = function (id, item, complete, startDate) {
     tasksService.updateTask(id, item, complete, startDate)
                 .then(function () {
-                  daily.getTasks();
+                  tasksService.getTasks();
                 });
   };
 
@@ -46,7 +46,7 @@ function DailyController($http, tasksService, eventsService) {
   daily.deleteTask = function (id) {
     tasksService.deleteTask(id)
                 .then(function () {
-                  daily.getTasks();
+                  tasksService.getTasks();
                 });
   };
 
