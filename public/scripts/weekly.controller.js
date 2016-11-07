@@ -1,7 +1,7 @@
 angular.module('tasksApp')
        .controller('WeeklyController', WeeklyController);
 
-function WeeklyController($http, eventsService) {
+function WeeklyController($http, eventsService, tasksService) {
   console.log('WeeklyController loaded');
   var weekly = this;
 
@@ -15,6 +15,6 @@ function WeeklyController($http, eventsService) {
       })
   }
 
-  // weekly.getCalendarEvents();
+  weekly.tasks = tasksService.items;
 
 };

@@ -5,17 +5,17 @@ function DailyController($http, tasksService, eventsService) {
   console.log('DailyController loaded');
   var daily = this;
 
-  daily.items = [];
+  // tasks to be displayed on the DOM
+  this.items = tasksService.items;
+
+  // events to be displayed on the DOM
+  var today = moment().format('dddd').toLowerCase();
+  daily.events = eventsService.week[today];
 
   // gets tasks from DB
   daily.getTasks = function () {
-    tasksService.getTasks()
-                .then(printTasks);
+    tasksService.getTasks();
   };
-
-  function printTasks(response) {
-    daily.items = response;
-  }
 
   // add a task to the DB
   daily.addTask = function (item, startDate) {
@@ -49,10 +49,5 @@ function DailyController($http, tasksService, eventsService) {
                   daily.getTasks();
                 });
   };
-
-  daily.getTasks();
-
-  var today = moment().format('dddd').toLowerCase();
-  daily.events = eventsService.week[today];
 
 };

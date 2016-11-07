@@ -35,14 +35,14 @@ function eventsService($http) {
 
       // checks if it is a date is a multi or single day event
       if (!event.start.dateTime) {
-        console.log('multiple day event', moment(event.start.date).format('dddd'), event.start.date, 'to', moment(event.end.date).format('dddd'), event.end.date);
+        // console.log('multiple day event', moment(event.start.date).format('dddd'), event.start.date, 'to', moment(event.end.date).format('dddd'), event.end.date);
         var multiDay = moment(event.start.date).format('dddd').toLowerCase();
         // weekly.day[day].push(event);
 
       } else {
-        console.log('event', moment(event.start.dateTime).format('dddd'), 'until', moment(event.end.dateTime).format('dddd'));
+        // console.log('event', moment(event.start.dateTime).format('dddd'), 'until', moment(event.end.dateTime).format('dddd'));
         var day = moment(event.start.dateTime).format('dddd').toLowerCase();
-        console.log('sunday', that.week.sunday);
+        // console.log('sunday', that.week.sunday);
         that.week[day].push(event);
       }
 
@@ -51,7 +51,6 @@ function eventsService($http) {
     return;
   };
 
-  this.getCalendarEvents();
 };
 
 // takes in a day and finds the closet previous Sunday

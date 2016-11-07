@@ -1,7 +1,7 @@
 angular.module('tasksApp')
        .controller('TasksController', TasksController);
 
-function TasksController($http) {
+function TasksController($http, tasksService, eventsService) {
   console.log('TasksController loaded');
   var tasks = this;
 
@@ -13,9 +13,11 @@ function TasksController($http) {
 
   function printEverydayTasks(response) {
     tasks.boxTasks = response.data;
-    
+
   };
 
+  tasksService.getTasks();
+  eventsService.getCalendarEvents();
   tasks.getEverydayTasks();
 };
 

@@ -2,6 +2,9 @@ angular.module('tasksApp')
        .service('tasksService', tasksService);
 
 function tasksService($http) {
+  var that = this;
+
+  this.items = [];
 
   // get tasks from the DB
   this.getTasks = function () {
@@ -18,7 +21,9 @@ function tasksService($http) {
 
     });
 
-    return todos;
+    that.items = todos;
+
+    return;
   };
 
   // add a new task to the DB
@@ -60,6 +65,7 @@ function tasksService($http) {
 
         errorCallback);
   };
+
 };
 
 // callback error function
