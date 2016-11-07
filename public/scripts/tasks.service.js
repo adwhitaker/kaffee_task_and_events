@@ -3,7 +3,7 @@ angular.module('tasksApp')
 
 function tasksService($http) {
 
-  // get tasks
+  // get tasks from the DB
   this.getTasks = function () {
     return $http.get('/tasks')
          .then(changeTasksDate, errorCallback);
@@ -19,7 +19,7 @@ function tasksService($http) {
     });
 
     return todos;
-  } // end of get tasks
+  };
 
   // add a new task to the DB
   this.addTask = function (item, startDate) {
@@ -29,22 +29,37 @@ function tasksService($http) {
 
       return $http.post('/tasks', tasksObject)
          .then(function () {
-                console.log('success');
                 return;
               },
 
            errorCallback);
     };
 
-  // delete tasks
-  this.deleteTask = function (id) {
-    return $http.delete('/tasks/' + id)
-    .then(function () {
+  // update task in the DB
+  this.updateTask = function (id, item, complete, startDate) {
+    var taskUpdate = { item: item,
+                        complete: complete,
+                        start_date: startDate,
+                      };
+
+    return $http.put('/tasks/' + id, taskUpdate)
+      .then(function () {
         return;
       },
 
         errorCallback);
-  };;
+
+  };
+
+  // delete task in the DB
+  this.deleteTask = function (id) {
+    return $http.delete('/tasks/' + id)
+      .then(function () {
+        return;
+      },
+
+        errorCallback);
+  };
 };
 
 // callback error function
