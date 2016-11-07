@@ -5,6 +5,41 @@
     <title>Settings</title>
   </head>
   <body>
-<a href="/index.html">complete</a>
+<a href="/daily">complete</a>
+
+  <h2>Add Everyday Task</h2>
+  <form>
+    <div class="form-group">
+      <label for="item1">Action:</label>
+      <input type="text" class="form-control" id="item1" ng-model="settings.item1" placeholder="Read">
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="text" class="form-control" id="amount" ng-model="settings.amount" placeholder="10">
+    </div>
+    <div class="form-group">
+      <label for="item2">Item:</label>
+      <input type="text" class="form-control" id="item2" ng-model="settings.item2" placeholder="Pages">
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="settings.addDailyTask(settings.item1, settings.amount, settings.item2)">Add Daily Task</button>
+  </form>
+
+  <form ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks">
+      <div class="form-group">
+        <label for="item1">Action:</label>
+        <input type="text" class="form-control" id="item1" ng-model="item.item1" placeholder="Read">
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="text" class="form-control" id="amount" ng-model="item.amount" placeholder="10">
+      </div>
+      <div class="form-group">
+        <label for="item2">Item:</label>
+        <input type="text" class="form-control" id="item2" ng-model="item.item2" placeholder="Pages">
+      </div>
+      <button type="submit" class="btn btn-default" ng-click="settings.deleteDailyTask(item.id)">Delete</button>
+      <button type="submit" class="btn btn-default" ng-click="settings.updateDailyTask(item.id, item.item1, item.amount, item.item2)">Update</button>
+    </form>
+
   </body>
 </html>
