@@ -1,11 +1,13 @@
 <h1>weekly</h1>
 <div class="weeklyTasksEvents">
   <div class="eventDay" ng-repeat="(day, events) in weekly.days">
+    
+
     <div class="events">
       <div class="task" >
         <p>
           {{day.toUpperCase()}}
-          
+
           <!-- {{events}} -->
         </p>
         <p ng-repeat="event in events">{{event.summary}}</p>
