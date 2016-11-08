@@ -1,0 +1,37 @@
+<div class="tasks">
+
+  <div class="tasksHeader">
+    <h2>Complete Tasks</h2>
+  </div>
+
+  <div class="tasksBody">
+    <div class="task" ng-repeat="item in complete.items.taskItems.completed">
+      <div class="taskBar">
+        <input type="checkbox" ng-model="item.complete" ng-click="complete.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)"><label>{{item.item}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">Edit</button>
+      </div>
+      <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
+
+        <div class="well well-lg">
+          <form ng-init="item.name = item.item">
+            <div class="form-group">
+              <label for="item">Task:</label>
+              <input type="text" class="form-control" id="item" ng-model="item.name">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" ng-model="item.dateCheckbox" aria-label="Tottle ngHide">Edit Date</label>
+            </div>
+            <div class="check-element animate-show" ng-show="item.dateCheckbox">
+              <p class="form-group">
+                <label>Task Start Date</label>
+                <input type="text" ng-model="item.start_date" class="form-control" placeholder="mm/dd/yyyy">
+              </p>
+
+            </div>
+            <!-- <button type="submit" class="btn btn-default" ng-click="daily.deleteTask(item.id)">Delete</button>
+            <button type="submit" class="btn btn-default" ng-click="daily.updateTask(item.id, item.name, item.complete, item.start_date)">Update</button> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
