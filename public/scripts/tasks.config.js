@@ -10,6 +10,9 @@ function configTasks($routeProvider, $locationProvider) {
   }).when('/weekly', {
     templateUrl: 'views/weekly.html',
     controller: 'WeeklyController as weekly',
+  }).when('/complete', {
+    templateUrl: 'views/complete.html',
+    controller: 'CompleteController as complete',
   }).when('/settings', {
     templateUrl: 'views/settings.html',
     controller: 'SettingsController as settings',
