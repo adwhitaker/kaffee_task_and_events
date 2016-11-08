@@ -11,6 +11,15 @@ function TasksController($http, tasksService, eventsService, everyDayTasksServic
     window.location = '/logout';
   };
 
+  tasks.completeDaily = function (id, item1, amount, item2, complete) {
+    var completeOpposite = !complete;
+
+    everyDayTasksService.updateDailyTask(id, item1, amount, item2, completeOpposite)
+                        .then(function () {
+                          everyDayTasksService.getEveryDayTasks();
+                        });
+  };
+
   tasksService.getTasks();
   eventsService.getCalendarEvents();
   everyDayTasksService.getEveryDayTasks();
