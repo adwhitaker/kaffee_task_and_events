@@ -29,7 +29,6 @@ function everyDayTasksService($http) {
 
     return $http.post('/dailytasks', dailyTaskObject)
          .then(function (response) {
-            console.log('added');
             return;
           },
 
@@ -37,16 +36,17 @@ function everyDayTasksService($http) {
        );
   };
 
-  this.updateDailyTask = function (id, item1, amount, item2) {
+  // update everyday task in DB
+  this.updateDailyTask = function (id, item1, amount, item2, complete) {
     var dailyTaskObject = {
       item1: item1,
       amount: amount,
       item2: item2,
+      complete: complete,
     };
 
     return $http.put('/dailytasks/' + id, dailyTaskObject)
          .then(function (response) {
-            console.log('updated', response);
             return;
           },
 
@@ -54,11 +54,11 @@ function everyDayTasksService($http) {
       );
   };
 
+  // delete everyday task in DB
   this.deleteDailyTask = function (id) {
 
       return $http.delete('dailytasks/' + id)
            .then(function (response) {
-              console.log('deleted!');
               return;
             });
     };
