@@ -12,11 +12,11 @@ header {
   justify-content: center;
 }
 .box {
-  background-color: #807D80;
-  text-align: center;
+
 }
 nav {
   background-color: #807D80;
+  height: 30px;
 }
 ul {
   display: flex;
@@ -26,9 +26,22 @@ li:last-child {
   margin-left: 10px;
 }
 .box {
+  background-color: #414042;
+  text-align: center;
   height: 100px;
   width: 100px;
-  border: 2px black solid;
+  border: 2px #807D80 solid;
+  border-radius: 10px;
+  margin: 2px;
+}
+.boxComplete {
+  background-color: #414042;
+  text-align: center;
+  color: green;
+  height: 100px;
+  width: 100px;
+  border: 2px green solid;
+  border-radius: 10px;
   margin: 2px;
 }
 main {
@@ -84,6 +97,7 @@ main form {
 }
 .eventDay {
   width: 15%;
-  height: 200px;
-  border: 2px solid blue;
+  border: 2px solid #807D80;
+  border-radius: 10px;
+  margin: 2px;
 }
