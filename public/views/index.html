@@ -26,6 +26,7 @@
     <script src="vendors/moment.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="styles/resetCSS.css">
+    <link rel="stylesheet" href="styles/materialdesignicons.min.css"/>
     <link rel="stylesheet" href="vendors/bootstrap.min.css">
     <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -38,7 +39,7 @@
     <h1>Kaffee</h1>
 
     <div class="boxes">
-      <div class="box" ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks">
+      <div ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks" ng-class="{true: 'boxComplete', false: 'box'}[item.complete == true]" ng-click="tasks.completeDaily(item.id, item.item1, item.amount, item.item2, item.complete)">
         <p>{{item.item1}}</p>
         <p>{{item.amount}}</p>
         <p>{{item.item2}}</p>
