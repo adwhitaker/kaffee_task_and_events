@@ -37,10 +37,10 @@ li:last-child {
 .boxComplete {
   background-color: #414042;
   text-align: center;
-  color: green;
+  color: #71B800;
   height: 100px;
   width: 100px;
-  border: 2px green solid;
+  border: 2px #71B800 solid;
   border-radius: 10px;
   margin: 2px;
 }
