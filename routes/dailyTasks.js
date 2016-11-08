@@ -11,7 +11,9 @@ router.route('/:id')
       .delete(deleteDailyTask);
 
 function getDailyTask(req, res) {
-  knex.select().from('task_daily').then(function (response) {
+  var userID = req.user.id;
+
+  knex.select().from('task_daily').where('item_creator', userID).orderBy('id').then(function (response) {
     res.send(response);
   }).catch(function (err) {
     console.log('Error Querying the DB', err);
@@ -20,11 +22,21 @@ function getDailyTask(req, res) {
 };
 
 function addDailyTask(req, res) {
+  var userID = req.user.id;
   var item1 = req.body.item1;
   var amount = req.body.amount;
   var item2 = req.body.item2;
+  var complete = false;
 
-  knex.insert({ item1: item1, amount: amount, item2: item2 }).into('task_daily')
+  var dailyTask = { item_creator: userID,
+                        complete: complete,
+                        item1: item1,
+                        amount: amount,
+                        item2: item2,
+                      };
+
+  console.log('dailyTask', dailyTask);
+  knex.insert(dailyTask).into('task_daily')
       .then(function (response) {
         console.log('response', response);
         res.sendStatus(200);
@@ -35,15 +47,22 @@ function addDailyTask(req, res) {
 };
 
 function updateDailyTask(req, res) {
+  var userID = req.user.id;
   var id = req.params.id;
   var item1 = req.body.item1;
   var amount = req.body.amount;
   var item2 = req.body.item2;
+  var complete = req.body.complete;
 
-  console.log('info', id, item1, amount, item2);
+  var dailyTask = { item_creator: userID,
+                        complete: complete,
+                        item1: item1,
+                        amount: amount,
+                        item2: item2,
+                      };
 
   knex('task_daily').where('id', id)
-             .update({ item1: item1, amount: amount, item2: item2 })
+             .update(dailyTask)
              .then(function (response) {
               console.log('update response', response);
               res.sendStatus(200);
