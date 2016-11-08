@@ -8,6 +8,7 @@ function tasksService($http) {
 
   var items = {
     tasks: [],
+    completed: [],
   };
 
   this.taskItems = items;
@@ -20,15 +21,23 @@ function tasksService($http) {
   };
 
   function changeTasksDate(response) {
+    items.tasks = [];
+    items.completed = [];
     var todos = response.data;
     todos.forEach(function (todo) {
+      console.log(todo);
       if (todo.start_date) {
         todo.start_date = moment(todo.start_date).format('L');
       }
 
+      if (todo.complete) {
+        items.completed.push(todo);
+      } else {
+        items.tasks.push(todo);
+      }
     });
 
-    items.tasks = todos;
+    // items.tasks = todos;
     return;
   };
 
