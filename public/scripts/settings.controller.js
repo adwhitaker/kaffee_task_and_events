@@ -15,7 +15,9 @@ function SettingsController(everyDayTasksService) {
 
   // update a daily task in the DB
   settings.updateDailyTask = function (id, item1, amount, item2) {
-    everyDayTasksService.updateDailyTask(id, item1, amount, item2)
+    var complete = false;
+
+    everyDayTasksService.updateDailyTask(id, item1, amount, item2, complete)
                       .then(function () {
                           everyDayTasksService.getEveryDayTasks();
                         });
