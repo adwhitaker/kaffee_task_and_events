@@ -11,8 +11,11 @@ router.route('/:id')
       .delete(deleteTask);
 
 function getTasks(req, res) {
+  var userID = req.user.id;
+
   knex.select()
       .from('task_items')
+      .where('item_creater', userID)
       .orderBy('id')
       .then(function (data) {
         res.send(data);
