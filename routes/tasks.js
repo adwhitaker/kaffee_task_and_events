@@ -77,7 +77,6 @@ function deleteTask(req, res) {
   knex('task_items').where('id', id)
                .delete()
                .then(function () {
-                  console.log('deleted entry');
                   res.sendStatus(204);
                 }).catch(function (err) {
                   console.log(err);
