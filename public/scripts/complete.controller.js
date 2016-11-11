@@ -2,24 +2,18 @@ angular.module('tasksApp')
        .controller('CompleteController', CompleteController);
 
 function CompleteController($http, tasksService) {
-  console.log('CompleteController loaded');
   var complete = this;
 
   complete.items = tasksService;
 
+  // function to update the completed task up not complete
+  // once the task is set to not complete tasksService gets tasks from the DB
+  // and updates the DOM
   complete.updateTask = function (id, item, complete, startDate) {
     tasksService.updateTask(id, item, complete, startDate)
                 .then(function () {
                   tasksService.getTasks();
                 });
   };
-
-  // delete tasks from DB
-  // daily.deleteTask = function (id) {
-  //   tasksService.deleteTask(id)
-  //               .then(function () {
-  //                 tasksService.getTasks();
-  //               });
-  // };
 
 };
