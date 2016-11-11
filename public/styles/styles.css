@@ -115,7 +115,7 @@ form {
 }
 /* daily.html tasks header */
 .tasksHeader {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .tasksHeader h2 {
   display: inline;
@@ -160,15 +160,16 @@ form {
   display: none;
 }
 .show {
-
 }
+
+/* daily.event styling */
+/* the rest of the styling is taken from the tasks */
 .events {
-  margin: auto;
+  text-align: left;
+  margin: 20px auto;
   width: 50%;
 }
-.eventsHeader {
-  text-align: left;
-}
+
 .weeklyTasksEvents {
   padding-top: 20px;
   display: flex;

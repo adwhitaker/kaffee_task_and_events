@@ -24,8 +24,8 @@
           </div>
 
           <div class="check-element animate-show form-group" ng-show="daily.dateCheckbox">
-              <label>Task Start Date:</label>
-              <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
+            <label>Task Start Date:</label>
+            <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
           </div>
         </form>
       </div>
@@ -59,7 +59,7 @@
   <div class="tasksBody">
     <div class="taskDisplay" ng-repeat="item in daily.items.taskItems.tasks">
 
-      <!-- task display with complete checkbox and drop down to edit -->
+      <!-- task display with complete checkbox and drop down button to edit -->
       <div class="taskBar">
         <input type="checkbox" ng-model="item.complete" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)">
         <label>{{item.item}}</label>
@@ -92,15 +92,19 @@
   </div>
 </div>
 
+<!-- current day events -->
 <div class="events">
-  <div class="eventsHeader">
+
+  <!-- event header -->
+  <div class="tasksHeader">
     <h2>Events</h2>
   </div>
 
+  <!--  event body -->
   <div class="tasksBody">
 
-    <div class="task" ng-repeat="event in daily.events">
-
+    <!-- event display with drop down button to edit -->
+    <div class="taskDisplay" ng-repeat="event in daily.events">
       <div class="taskBar">
         <label>{{event.summary}}</label>
         <button type="button" class="btn btn-event" ng-click="item.isCollapsed = !item.isCollapsed">
@@ -108,10 +112,9 @@
         </button>
       </div>
 
+      <!-- drop down containing information about the event -->
       <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
-
         <div class="well well-lg">
-          <!-- <p>{{event.start.dateTime | date : 'fullDate'}}</p> -->
           <p>{{event.start.dateTime | date : 'shortTime'}} - {{event.end.dateTime | date : 'shortTime'}}</p>
           <p>{{event.location}}</p>
           <p>{{event.description}}</p>
@@ -119,4 +122,4 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
