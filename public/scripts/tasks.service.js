@@ -4,32 +4,35 @@ angular.module('tasksApp')
 function tasksService($http) {
   var that = this;
 
-  this.items = [];
-
+  // tasks returned from the DB stored in either tasks
   var items = {
     tasks: [],
     completed: [],
   };
 
-  this.taskItems = items;
+  that.taskItems = items;
 
   // get tasks from the DB
-  this.getTasks = function () {
+  that.getTasks = function () {
 
     return $http.get('/tasks')
          .then(changeTasksDate, errorCallback);
   };
 
+  // function to format the start date to mm/dd/yyyy
+  // and seperate completed and not completed tasks
   function changeTasksDate(response) {
     items.tasks = [];
     items.completed = [];
     var todos = response.data;
     todos.forEach(function (todo) {
-      console.log(todo);
+
+      // format start date
       if (todo.start_date) {
         todo.start_date = moment(todo.start_date).format('L');
       }
 
+      // seperate completed and not completed tasks
       if (todo.complete) {
         items.completed.push(todo);
       } else {
@@ -37,12 +40,11 @@ function tasksService($http) {
       }
     });
 
-    // items.tasks = todos;
     return;
   };
 
   // add a new task to the DB
-  this.addTask = function (item, startDate) {
+  that.addTask = function (item, startDate) {
       var tasksObject = { item: item,
                         start_date: startDate,
                       };
@@ -56,7 +58,7 @@ function tasksService($http) {
     };
 
   // update task in the DB
-  this.updateTask = function (id, item, complete, startDate) {
+  that.updateTask = function (id, item, complete, startDate) {
     var taskUpdate = { item: item,
                         complete: complete,
                         start_date: startDate,
@@ -72,7 +74,7 @@ function tasksService($http) {
   };
 
   // delete task in the DB
-  this.deleteTask = function (id) {
+  that.deleteTask = function (id) {
     return $http.delete('/tasks/' + id)
       .then(function () {
         return;
