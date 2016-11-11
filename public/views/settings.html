@@ -1,29 +1,56 @@
-<!DOCTYPE html>
-<html ng-app="tasksApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Settings</title>
-  </head>
-  <body>
-<a href="/daily">complete</a>
+<!-- Add daily task modal / once submitted task is displayed to index.html bar and in settings.html -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
-  <h2>Add Everyday Task</h2>
-  <form>
-    <div class="form-group">
-      <label for="item1">Action:</label>
-      <input type="text" class="form-control" id="item1" ng-model="settings.item1" placeholder="Read">
-    </div>
-    <div class="form-group">
-      <label for="amount">Amount:</label>
-      <input type="text" class="form-control" id="amount" ng-model="settings.amount" placeholder="10">
-    </div>
-    <div class="form-group">
-      <label for="item2">Item:</label>
-      <input type="text" class="form-control" id="item2" ng-model="settings.item2" placeholder="Pages">
-    </div>
-    <button type="button" class="btn btn-primary" ng-click="settings.addDailyTask(settings.item1, settings.amount, settings.item2)">Add Daily Task</button>
-  </form>
+      <!-- daily task modal header  -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add Daily Task</h4>
+      </div>
 
+      <!-- daily task modal body containing form  -->
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="item1">Action:</label>
+            <input type="text" class="form-control" id="item1" ng-model="settings.item1" placeholder="Read">
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="text" class="form-control" id="amount" ng-model="settings.amount" placeholder="10">
+          </div>
+          <div class="form-group">
+            <label for="item2">Item:</label>
+            <input type="text" class="form-control" id="item2" ng-model="settings.item2" placeholder="Pages">
+          </div>
+        </form>
+      </div>
+
+      <!-- modal footer / cancel and daily task button -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-default" ng-click="settings.addDailyTask(settings.item1, settings.amount, settings.item2)">Add Daily Task</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- daily tasks display on DOM -->
+<!-- daily tasks header -->
+<div class="tasksHeader">
+  <h2>Daily Tasks</h2>
+
+  <!-- button to trigger add daily task modal -->
+  <div type="button" class="btn btn-addTask" data-toggle="modal" data-target="#myModal">
+    <i class="material-icons">add_circle_outline</i>
+  </div>
+</div>
+
+  <!-- repeated every day task -->
+  <div class="everyDayTask">
   <form ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks">
       <div class="form-group">
         <label for="item1">Action:</label>
@@ -37,9 +64,9 @@
         <label for="item2">Item:</label>
         <input type="text" class="form-control" id="item2" ng-model="item.item2" placeholder="Pages">
       </div>
-      <button type="submit" class="btn btn-default" ng-click="settings.deleteDailyTask(item.id)">Delete</button>
+
+      <!-- buttons to update or delete everyday task -->
+      <button type="submit" class="btn btn-warning" ng-click="settings.deleteDailyTask(item.id)">Delete</button>
       <button type="submit" class="btn btn-default" ng-click="settings.updateDailyTask(item.id, item.item1, item.amount, item.item2)">Update</button>
     </form>
-
-  </body>
-</html>
+  </div>
