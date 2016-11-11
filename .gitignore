@@ -4,3 +4,4 @@ public/vendors
 .DS_Store
 quickstart.js
 client_secret.json
+db/auth.js
