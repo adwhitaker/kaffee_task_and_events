@@ -1,66 +1,94 @@
 <!DOCTYPE html>
 <html ng-app="tasksApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Kaffee</title>
+<head>
+  <meta charset="utf-8">
+  <title>Kaffee</title>
 
-    <script src="vendors/angular.min.js" charset="utf-8"></script>
-    <script src="vendors/angular-route.min.js" charset="utf-8"></script>
-    <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
-    <script src="vendors/angular-sanitize.min.js" charset="utf-8"></script>
-    <script src="vendors/jquery.min.js" charset="utf-8"></script>
+  <!--  Angular -->
+  <script src="vendors/angular.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-route.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-sanitize.min.js" charset="utf-8"></script>
+  <script src="vendors/jquery.min.js" charset="utf-8"></script>
 
-    <script src="scripts/app.module.js" charset="utf-8"></script>
-    <script src="scripts/tasks.config.js" charset="utf-8"></script>
-    <script src="scripts/tasks.controller.js" charset="utf-8"></script>
-    <script src="scripts/daily.controller.js" charset="utf-8"></script>
-    <script src="scripts/weekly.controller.js" charset="utf-8"></script>
-    <script src="scripts/settings.controller.js" charset="utf-8"></script>
-    <script src="scripts/complete.controller.js" charset="utf-8"></script>
-    <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
-    <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
+  <!--  application config, controllers, and services -->
+  <script src="scripts/app.module.js" charset="utf-8"></script>
+  <script src="scripts/tasks.config.js" charset="utf-8"></script>
+  <script src="scripts/tasks.controller.js" charset="utf-8"></script>
+  <script src="scripts/daily.controller.js" charset="utf-8"></script>
+  <script src="scripts/weekly.controller.js" charset="utf-8"></script>
+  <script src="scripts/settings.controller.js" charset="utf-8"></script>
+  <script src="scripts/complete.controller.js" charset="utf-8"></script>
+  <script src="scripts/modal.controller.js" charset="utf-8"></script>
+  <script src="scripts/everydayTasks.service.js" charset="utf-8"></script>
+  <script src="scripts/tasks.service.js" charset="utf-8"></script>
+  <script src="scripts/events.service.js" charset="utf-8"></script>
+  <script src="scripts/settings.service.js" charset="utf-8"></script>
 
-    <script src="scripts/everydayTasks.service.js" charset="utf-8"></script>
-    <script src="scripts/tasks.service.js" charset="utf-8"></script>
-    <script src="scripts/events.service.js" charset="utf-8"></script>
-    <script src="scripts/settings.service.js" charset="utf-8"></script>
-    <script src="vendors/moment.js" charset="utf-8"></script>
+  <!--  Bootstrap -->
+  <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
+  <script src="vendors/vendors/ui-bootstrap.js" charset="utf-8"></script>
+  <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
 
-    <link rel="stylesheet" href="styles/resetCSS.css">
-    <link rel="stylesheet" href="styles/materialdesignicons.min.css"/>
-    <link rel="stylesheet" href="vendors/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css">
-    <link rel="stylesheet" href="styles/styles.css">
+  <!--  moment.js -->
+  <script src="vendors/moment.js" charset="utf-8"></script>
 
-    <base href="/" />
-  </head>
-  <body ng-controller="TasksController as tasks">
+  <!--  css -->
+  <link rel="stylesheet" href="styles/resetCSS.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css">
+  <link rel="stylesheet" href="styles/styles.css">
 
-    <header>
-    <h1>Kaffee</h1>
+  <base href="/" />
+</head>
+<body ng-controller="TasksController as tasks">
 
+  <!--  header -->
+  <header>
+    <!--  logo -->
+    <div class="logo">
+      <h1> <i class="material-icons md-48">local_cafe</i> Kaffee</h1>
+    </div>
+
+    <!--  every day tasks -->
     <div class="boxes">
-      <div ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks" ng-class="{true: 'boxComplete', false: 'box'}[item.complete == true]" ng-click="tasks.completeDaily(item.id, item.item1, item.amount, item.item2, item.complete)">
+      <div ng-repeat="item in tasks.boxTasks.boxTopTasks.boxTasks"
+        ng-class="{true: 'box complete', false: 'box'}[item.complete == true]"
+        ng-click="tasks.completeDaily(item.id, item.item1, item.amount, item.item2, item.complete)">
         <p>{{item.item1}}</p>
         <p>{{item.amount}}</p>
         <p>{{item.item2}}</p>
       </div>
     </div>
 
+    <!--  logout and settings -->
     <div class="logout">
       <h3><a ng-click="tasks.logout()">Logout</a></h3>
-      <h3><a href="/settings">Settings</a></h3>
+      <h3><a href="/settings"><i class="material-icons">settings</i></a></h3>
     </div>
-    </header>
-    <nav>
-      <ul>
-        <li><a href='/daily'>Daily Tasks</a></li>
-        <li><a href='/weekly'>Weekly Tasks</a></li>
-        <li><a href='/complete'>Complete Tasks</a></li>
-      </ul>
-    </nav>
-    <main>
-      <ng-view></ng-view>
-    </main>
-  </body>
+  </header>
+
+  <!--  navigation bar -->
+  <nav>
+    <!--  page links -->
+    <ul>
+      <li><a href='/daily'>Daily Tasks</a></li>
+      <li><a href='/weekly'>Weekly Tasks</a></li>
+      <li><a href='/complete'>Complete Tasks</a></li>
+    </ul>
+  </nav>
+
+  <!-- main content -->
+  <main>
+    <ng-view></ng-view>
+  </main>
+
+  <!--  page footer -->
+  <footer>
+    <p>
+      Copyright &copy 2016 Alexander Whitaker All Rights Reserved.
+    </p>
+  </footer>
+</body>
 </html>
