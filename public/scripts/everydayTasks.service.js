@@ -4,14 +4,16 @@ angular.module('tasksApp')
 function everyDayTasksService($http) {
   var that = this;
 
+  // the returned everyday tasks are stored in this array
+  // and then displayed on the DOM in index.html and settings.html
   var tasks = {
     boxTasks: [],
   };
 
-  this.boxTopTasks = tasks;
+  that.boxTopTasks = tasks;
 
   // get everyday tasks from DB
-  this.getEveryDayTasks = function () {
+  that.getEveryDayTasks = function () {
     $http.get('/dailytasks').then(printEverydayTasks, errorCallback);
   };
 
@@ -20,7 +22,7 @@ function everyDayTasksService($http) {
   };
 
   // add everyday task to the DB
-  this.addDailyTask = function (item1, amount, item2) {
+  that.addDailyTask = function (item1, amount, item2) {
     var dailyTaskObject = {
       item1: item1,
       amount: amount,
@@ -37,7 +39,7 @@ function everyDayTasksService($http) {
   };
 
   // update everyday task in DB
-  this.updateDailyTask = function (id, item1, amount, item2, complete) {
+  that.updateDailyTask = function (id, item1, amount, item2, complete) {
     var dailyTaskObject = {
       item1: item1,
       amount: amount,
@@ -55,7 +57,7 @@ function everyDayTasksService($http) {
   };
 
   // delete everyday task in DB
-  this.deleteDailyTask = function (id) {
+  that.deleteDailyTask = function (id) {
 
       return $http.delete('dailytasks/' + id)
            .then(function (response) {
@@ -64,6 +66,7 @@ function everyDayTasksService($http) {
     };
 };
 
+// callback error function
 function errorCallback(error) {
   console.log('error making http request', error);
 };
