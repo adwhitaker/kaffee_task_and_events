@@ -5,6 +5,8 @@ function SettingsController(everyDayTasksService) {
   var settings = this;
 
   // add a daily task to the DB
+  // resets add daily task form fields to empty
+  // then gets every day taskf from the DB
   settings.addDailyTask = function (item1, amount, item2) {
     everyDayTasksService.addDailyTask(item1, amount, item2)
                         .then(function () {
