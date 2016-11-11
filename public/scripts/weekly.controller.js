@@ -2,19 +2,16 @@ angular.module('tasksApp')
        .controller('WeeklyController', WeeklyController);
 
 function WeeklyController($http, eventsService, tasksService) {
-  console.log('WeeklyController loaded');
+
   var weekly = this;
 
+  // display calendar and previous Sunday date in weekly.html
   weekly.days = eventsService.week;
+  weekly.sunday = eventsService.sunday;
 
+  // get calendar events from Google Calendar
   weekly.getCalendarEvents = function () {
-    // var newMoment = moment();
-    eventsService.getCalendarEvents()
-      .then(function (response) {
-        console.log('respnse', response);
-      })
-  }
-
-  weekly.tasks = tasksService.items;
+    eventsService.getCalendarEvents();
+  };
 
 };
