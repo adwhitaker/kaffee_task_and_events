@@ -9,6 +9,7 @@ const googleAuth = require('./routes/googleAuth');
 const googleCalendar = require('./routes/googleCalendar');
 const tasks = require('./routes/tasks');
 const dailyTasks = require('./routes/dailyTasks');
+const logout = require('./routes/logout');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/auth/google', googleAuth);
 app.use('/calendar', googleCalendar);
 app.use('/tasks', tasks);
 app.use('/dailytasks', dailyTasks);
+app.use('/logout', logout);
 
 // is authenticated
 app.get('/*', function (req, res) {

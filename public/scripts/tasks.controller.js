@@ -1,14 +1,16 @@
 angular.module('tasksApp')
        .controller('TasksController', TasksController);
 
-function TasksController($http, tasksService, eventsService, everyDayTasksService) {
+function TasksController($http, tasksService, eventsService, everyDayTasksService, $route) {
   var tasks = this;
 
   // everyday tasks displayed index.html
   tasks.boxTasks = everyDayTasksService;
 
   tasks.logout = function () {
-    window.location = '/logout';
+    $http.get('/logout').then(function () {
+      $route.reload();
+    });
   };
 
   // function to update completed daily tasks once click in index.html
