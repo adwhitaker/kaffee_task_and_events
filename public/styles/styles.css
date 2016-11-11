@@ -1,6 +1,6 @@
 body {
   background-color: #414042;
-  background: #DBDECA url(https://s21.postimg.org/7nwrx51bb/grey_wash_wall.png) repeat fixed center;
+  background: #DBDECA url('../assets/grey_wash_wall.png') repeat fixed center;
   color: #F25B53;
 }
 h3  {
@@ -11,7 +11,7 @@ h3  {
 header {
   display: flex;
   justify-content: space-around;
-  background: #DBDECA url(https://s10.postimg.org/7lk78iyvt/purty_wood.png) repeat center;
+  background: #DBDECA url('../assets/purty_wood.png') repeat center;
   padding: 10px 0 10px 0;
 }
 
