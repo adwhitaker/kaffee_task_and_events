@@ -1,29 +1,33 @@
 body {
   background-color: #414042;
+  background: #DBDECA url(https://s21.postimg.org/7nwrx51bb/grey_wash_wall.png) repeat fixed center;
   color: #F25B53;
 }
+h3  {
+  padding-left: 20px
+}
+
+/*index.html header */
 header {
   display: flex;
   justify-content: space-around;
-  background-color: #DBDECA;
+  background: #DBDECA url(https://s10.postimg.org/7lk78iyvt/purty_wood.png) repeat center;
+  padding: 10px 0 10px 0;
 }
+
+/* index.html header logo */
+header h1 {
+    color: #414042;
+    font-size: 46px;
+}
+.material-icons.md-48 {
+  font-size: 30px;
+}
+
+/* index.html everyday tasks */
 .boxes {
   display: flex;
   justify-content: center;
-}
-.box {
-
-}
-nav {
-  background-color: #807D80;
-  height: 30px;
-}
-ul {
-  display: flex;
-  list-style: none;
-}
-li:last-child {
-  margin-left: 10px;
 }
 .box {
   background-color: #414042;
@@ -33,24 +37,73 @@ li:last-child {
   border: 2px #807D80 solid;
   border-radius: 10px;
   margin: 2px;
+  padding-top: 3px;
+  font-size: 15px;
+  font-weight: bold;
 }
-.boxComplete {
-  background-color: #414042;
-  text-align: center;
+.complete {
   color: #71B800;
-  height: 100px;
-  width: 100px;
   border: 2px #71B800 solid;
-  border-radius: 10px;
-  margin: 2px;
 }
+
+/* index.html settings and logout */
+.logout {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+header h3 a, header h3 a:visited {
+    color: #414042 !important;
+}
+
+header h3 a:hover, header h3 a:active {
+    color: #F25B53 !important;
+    text-decoration: none;
+}
+
+header h3 a.active a {
+    color: #F25B53 !important;
+}
+
+/* index.html navigation bar */
+nav {
+  background-color: #414042;
+  padding: 10px 0 3px 0;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li a, nav ul li a:visited {
+    color: #D3D7BF !important;
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+    font-size: 20px;
+}
+nav ul li a:hover, nav ul li a:active {
+    color: #F25B53 !important;
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+    font-size: 20px;
+}
+
+/* index.html main content */
 main {
+  margin: 20px;
   text-align: center;
 }
-main h1 {
-  text-align: left;
+
+/* index.html footer */
+footer {
+  font-size: 8px;
+  text-align: center;
+  position: relative;
+  height: 20px;
+  margin-top: 50px;
 }
-main form {
+
+/* align form text to the left */
+form {
   text-align: left;
 }
 
@@ -62,8 +115,23 @@ main form {
 .tasksHeader h2 {
   display: inline;
 }
+.btn-addTask {
+  margin: 0 0 4px 0;
+  padding: 0;
+  background-color: hsla(0, 0%, 0%, 0);
+}
+.btn-taskInfo {
+  background-color: hsla(0, 0%, 0%, 0);
+}
+.btn-event {
+  background-color: hsla(0, 0%, 0%, 0);
+}
+.tasksHeader {
+  padding-bottom: 20px;
+}
 .tasksBody {
   text-align: center;
+  font-size: 16px;
 }
 .task {
   margin: 2px;
@@ -92,6 +160,7 @@ main form {
   text-align: left;
 }
 .weeklyTasksEvents {
+  padding-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -100,4 +169,18 @@ main form {
   border: 2px solid #807D80;
   border-radius: 10px;
   margin: 2px;
+}
+.dayOfEvent {
+  font-weight: bolder;
+  font-size: 16px;
+}
+.addEveryDayTask {
+  text-align: center;
+  margin: 0 auto 40px auto;
+  width: 25%;
+}
+.everyDayTask {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
 }
