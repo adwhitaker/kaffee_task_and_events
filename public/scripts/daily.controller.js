@@ -2,13 +2,15 @@ angular.module('tasksApp')
        .controller('DailyController', DailyController);
 
 function DailyController($http, tasksService, eventsService) {
-  console.log('DailyController loaded');
   var daily = this;
 
-  // tasks to be displayed on the DOM
-  this.items = tasksService;
+  // this is the current date that is displayed on daily.html
+  daily.currentTime = moment().format('LL');
 
-  // events to be displayed on the DOM
+  // tasks to be displayed on the DOM in daily.html
+  daily.items = tasksService;
+
+  // events to be displayed on the DOM in daily.html
   var today = moment().format('dddd').toLowerCase();
   daily.events = eventsService.week[today];
 
@@ -18,6 +20,7 @@ function DailyController($http, tasksService, eventsService) {
   };
 
   // add a task to the DB
+  // resets the fields in the form to '' after submit
   daily.addTask = function (item, startDate) {
 
     if (!startDate) {
@@ -31,7 +34,6 @@ function DailyController($http, tasksService, eventsService) {
                   daily.item = '';
                   daily.startDate = '';
                 });
-
   };
 
   // update a task in the DB
@@ -49,5 +51,4 @@ function DailyController($http, tasksService, eventsService) {
                   tasksService.getTasks();
                 });
   };
-
 };
