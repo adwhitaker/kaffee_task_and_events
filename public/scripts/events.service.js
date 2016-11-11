@@ -4,6 +4,8 @@ angular.module('tasksApp')
 function eventsService($http) {
   var that = this;
 
+  // object where the events for the week are sorted
+  // after being retrieved from Google Calendar and displayed in weekly.html
   var days = {
     sunday: [],
     monday: [],
@@ -14,12 +16,20 @@ function eventsService($http) {
     saturday: [],
   };
 
-  this.week = days;
+  that.week = days;
 
-  this.getCalendarEvents = function () {
+  // weekly.html header containing previous Sunday date
+  that.sunday;
+
+  // http request getting events from Google Calendar
+  that.getCalendarEvents = function () {
+
+    // setting the variables for begining and end of the week
+    // using moments.js
     var newMoment = moment();
     var foundSunday = findSunday(newMoment);
     var newMinimumTime = newMoment.subtract(foundSunday, 'days').format();
+    that.sunday = moment(newMinimumTime).format('MMM Do YYYY');
     var newMaxTime = newMoment.add(6, 'days').format();
 
     return $http.get('/calendar', {
@@ -30,19 +40,19 @@ function eventsService($http) {
     }).then(printEvents, errorCallback);
   };
 
+  // function to add events returned from Google Calendar to their appropriate
+  // day in that.week
   function printEvents(response) {
     response.data.forEach(function (event) {
 
       // checks if it is a date is a multi or single day event
       if (!event.start.dateTime) {
-        // console.log('multiple day event', moment(event.start.date).format('dddd'), event.start.date, 'to', moment(event.end.date).format('dddd'), event.end.date);
         var multiDay = moment(event.start.date).format('dddd').toLowerCase();
-        // weekly.day[day].push(event);
+
+        // this function currently avoids adding multi-day events to that.week
 
       } else {
-        // console.log('event', moment(event.start.dateTime).format('dddd'), 'until', moment(event.end.dateTime).format('dddd'));
         var day = moment(event.start.dateTime).format('dddd').toLowerCase();
-        // console.log('sunday', that.week.sunday);
         that.week[day].push(event);
       }
 
@@ -53,7 +63,7 @@ function eventsService($http) {
 
 };
 
-// takes in a day and finds the closet previous Sunday
+// takes in a day and finds the closet previous Sunday using moments.js
 function findSunday(newTime) {
   if (moment(newTime).format('dddd') !== 'Sunday') {
 
