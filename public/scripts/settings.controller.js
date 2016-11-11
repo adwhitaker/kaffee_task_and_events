@@ -2,13 +2,15 @@ angular.module('tasksApp')
        .controller('SettingsController', SettingsController);
 
 function SettingsController(everyDayTasksService) {
-  console.log('SettingsController loaded');
   var settings = this;
 
   // add a daily task to the DB
   settings.addDailyTask = function (item1, amount, item2) {
     everyDayTasksService.addDailyTask(item1, amount, item2)
                         .then(function () {
+                          settings.item1 = '';
+                          settings.amount = '';
+                          settings.item2 = '';
                           everyDayTasksService.getEveryDayTasks();
                         });
   };
