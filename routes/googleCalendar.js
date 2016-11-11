@@ -1,23 +1,24 @@
 const router = require('express').Router();
 const passport = require('passport');
-
 var google = require('googleapis');
 var plus = google.plus('v1');
 var OAuth2 = google.auth.OAuth2;
-
 const auth = require('../db/auth');
-
 var calendar = google.calendar('v3');
 
+// new OAuth2 client setup
 var oauth2Client = new OAuth2(
   auth.googleAuth.clientID,
   auth.googleAuth.clientSecret,
   auth.googleAuth.callbackURL
 );
 
+// router to get events from Calendar
 router.get('/', getCalendarEvents);
 
 function getCalendarEvents(req, res) {
+
+  // takes in the time paramaters
   var newMinTime = req.query.newMinTime;
   var newMaxTime = req.query.newMaxTime;
 
@@ -25,6 +26,9 @@ function getCalendarEvents(req, res) {
     access_token: req.user.accesstoken,
     refresh_token: req.user.refreshtoken,
   });
+
+  // after setting accessToken and refreshToken
+  // runs function listEvents
   listEvents(oauth2Client, newMinTime, newMaxTime).then(function (futureEvents) {
     res.send(futureEvents);
   }).catch(function (err) {
@@ -33,6 +37,7 @@ function getCalendarEvents(req, res) {
   });
 };
 
+// listEvents function request to Google Calendar API for events
 function listEvents(auth, newMinTime, newMaxTime) {
   return new Promise(function (resolve, reject) {
 
@@ -41,7 +46,6 @@ function listEvents(auth, newMinTime, newMaxTime) {
       calendarId: 'primary',
       timeMin: newMinTime,
       timeMax: newMaxTime,
-      // maxResults: 10,
       singleEvents: true,
       orderBy: 'startTime',
     }, function (err, response) {
@@ -50,23 +54,13 @@ function listEvents(auth, newMinTime, newMaxTime) {
         return reject(err);
       }
 
+      // sets returned items as events and returns events
       var events = response.items;
-
       return resolve(events);
 
-      if (events.length == 0) {
-        console.log('No upcoming events found.');
-      } else {
-        console.log('Upcoming 10 events:');
-        for (var i = 0; i < events.length; i++) {
-          var event = events[i];
-          var start = event.start.dateTime || event.start.date;
-          console.log('%s - %s', start, event.summary);
-        }
-      }
     });
 
   });
-}
+};
 
 module.exports = router;
