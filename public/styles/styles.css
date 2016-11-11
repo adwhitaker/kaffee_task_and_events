@@ -107,10 +107,15 @@ form {
   text-align: left;
 }
 
+/* daily.html task styling */
 .tasks {
   text-align: left;
   margin: auto;
   width: 50%;
+}
+/* daily.html tasks header */
+.tasksHeader {
+  padding-bottom: 20px;
 }
 .tasksHeader h2 {
   display: inline;
@@ -118,34 +123,39 @@ form {
 .btn-addTask {
   margin: 0 0 4px 0;
   padding: 0;
-  background-color: hsla(0, 0%, 0%, 0);
+  background-color: hsla(300, 1%, 50%, 0);
 }
-.btn-taskInfo {
-  background-color: hsla(0, 0%, 0%, 0);
-}
-.btn-event {
-  background-color: hsla(0, 0%, 0%, 0);
-}
-.tasksHeader {
-  padding-bottom: 20px;
-}
+/* daily.html body task dropdown */
+/* tasksBody = entire task */
 .tasksBody {
   text-align: center;
   font-size: 16px;
-}
-.task {
   margin: 2px;
 }
+/* adds margin between tasks */
+.taskDisplay {
+  margin: 2px;
+}
+/* border around each task */
 .taskBar {
   border: 2px solid #807D80;
   border-radius: 10px;
 }
+/* main task display spacing */
 .tasksBody input {
   margin: 0 2px 0 2px;
 }
 .tasksBody label {
   width: 75%;
 }
+/* task dropdown button styling */
+.btn-taskInfo {
+  background-color: hsla(300, 1%, 50%, 0);
+}
+.btn-event {
+  background-color: hsla(300, 1%, 50%, 0);
+}
+
 .hidden {
   display: none;
 }

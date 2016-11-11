@@ -1,59 +1,73 @@
-<!-- Modal -->
+<!-- Add task modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
+      <!--  modal header -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Add a Task</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Task</h4>
       </div>
+
+      <!--  modal body / add task form -->
       <div class="modal-body">
         <form class="addTaskForm" ng-model="daily.addTaskForm">
           <div class="form-group">
             <label for="item">Task:</label>
             <input type="text" class="form-control" id="item" ng-model="daily.item">
           </div>
+
           <div class="checkbox">
             <label><input type="checkbox" ng-model="daily.dateCheckbox" aria-label="Tottle ngHide">Choose a Start Date</label>
           </div>
-          <div class="check-element animate-show" ng-show="daily.dateCheckbox">
-            <p class="form-group">
-              <label>Task Start Date</label>
-              <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
-            </p>
 
+          <div class="check-element animate-show form-group" ng-show="daily.dateCheckbox">
+              <label>Task Start Date:</label>
+              <input type="text" ng-model="daily.startDate" class="form-control" placeholder="mm/dd/yyyy">
           </div>
         </form>
       </div>
+
+      <!--  modal footer / cancel and submit buttons -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="daily.addTask(daily.item, daily.startDate, daily.endDate)">Add Task</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-default" ng-click="daily.addTask(daily.item, daily.startDate, daily.endDate)">Add Task</button>
       </div>
     </div>
   </div>
 </div>
 
-<h1>daily</h1>
+<!--  current date display -->
+<h3>{{daily.currentTime}}</h3>
 
+<!--  tasks to be completed -->
 <div class="tasks">
 
+  <!-- task header -->
   <div class="tasksHeader">
-
     <h2>Tasks</h2>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Add Task
-    </button>
+
+    <!-- button to trigger add modal -->
+    <div type="button" class="btn btn-addTask" data-toggle="modal" data-target="#myModal">
+      <i class="material-icons">add_circle_outline</i>
+    </div>
   </div>
 
+  <!-- task to be completed -->
   <div class="tasksBody">
-    <div class="task" ng-repeat="item in daily.items.taskItems.tasks">
-      <div class="taskBar">
-        <input type="checkbox" ng-model="item.complete" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)"><label>{{item.item}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">Edit</button>
-      </div>
-      <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
+    <div class="taskDisplay" ng-repeat="item in daily.items.taskItems.tasks">
 
+      <!-- task display with complete checkbox and drop down to edit -->
+      <div class="taskBar">
+        <input type="checkbox" ng-model="item.complete" ng-click="daily.updateTask(item.id, item.item, item.complete, item.start_date, item.end_date)">
+        <label>{{item.item}}</label>
+        <button type="button" class="btn btn-taskInfo" ng-click="item.isCollapsed = !item.isCollapsed"><i class="material-icons">mode_edit</i></button>
+      </div>
+
+      <!-- dropdown form to edit and update task -->
+      <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
         <div class="well well-lg">
           <form ng-init="item.name = item.item">
             <div class="form-group">
@@ -65,12 +79,11 @@
             </div>
             <div class="check-element animate-show" ng-show="item.dateCheckbox">
               <p class="form-group">
-                <label>Task Start Date</label>
+                <label>Task Start Date:</label>
                 <input type="text" ng-model="item.start_date" class="form-control" placeholder="mm/dd/yyyy">
               </p>
-
             </div>
-            <button type="submit" class="btn btn-default" ng-click="daily.deleteTask(item.id)">Delete</button>
+            <button type="submit" class="btn btn-warning" ng-click="daily.deleteTask(item.id)">Delete</button>
             <button type="submit" class="btn btn-default" ng-click="daily.updateTask(item.id, item.name, item.complete, item.start_date)">Update</button>
           </form>
         </div>
@@ -81,29 +94,27 @@
 
 <div class="events">
   <div class="eventsHeader">
-
     <h2>Events</h2>
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Add Task
-    </button> -->
   </div>
+
   <div class="tasksBody">
 
     <div class="task" ng-repeat="event in daily.events">
-      <div class="taskBar">
 
-        <label>{{event.summary}}</label> <button type="button" class="btn btn-default" ng-click="item.isCollapsed = !item.isCollapsed">View Event</button>
+      <div class="taskBar">
+        <label>{{event.summary}}</label>
+        <button type="button" class="btn btn-event" ng-click="item.isCollapsed = !item.isCollapsed">
+          <i class="material-icons">event</i>
+        </button>
       </div>
+
       <div ng-init="item.isCollapsed=true" uib-collapse="item.isCollapsed">
 
         <div class="well well-lg">
-          <p>{{event.description}}</p>
+          <!-- <p>{{event.start.dateTime | date : 'fullDate'}}</p> -->
+          <p>{{event.start.dateTime | date : 'shortTime'}} - {{event.end.dateTime | date : 'shortTime'}}</p>
           <p>{{event.location}}</p>
-          <p>{{event.start.dateTime | date : 'fullDate'}}</p>
-          <p>{{event.start.dateTime | date : 'shortTime'}}</p>
-          <p>{{event.end.dateTime | date : 'shortTime'}}</p>
-
+          <p>{{event.description}}</p>
         </div>
       </div>
     </div>
