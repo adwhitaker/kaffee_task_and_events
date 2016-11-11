@@ -1,24 +1,13 @@
-<h1>weekly</h1>
+<h3>Week of Sunday, {{weekly.sunday}}</h3>
+
+<!-- weekly events / calendar created dynamically -->
 <div class="weeklyTasksEvents">
   <div class="eventDay" ng-repeat="(day, events) in weekly.days">
-    
 
-    <div class="events">
-      <div class="task" >
-        <p>
-          {{day.toUpperCase()}}
+        <!-- day of the week -->
+        <p class="dayOfEvent">{{day.toUpperCase()}}</p>
 
-          <!-- {{events}} -->
-        </p>
+        <!-- daily events -->
         <p ng-repeat="event in events">{{event.summary}}</p>
-      </div>
-    </div>
-
   </div>
 </div>
-
-
-    <!-- <p>{{event.description}}</p>
-    <p>{{event.location}}</p>
-    <p>{{event.start.dateTime}}</p>
-    <p>{{event.end.dateTime}}</p> -->

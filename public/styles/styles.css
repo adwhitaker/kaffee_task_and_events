@@ -170,6 +170,7 @@ form {
   width: 50%;
 }
 
+/* weekly.html dynamically created weekly calendar container */
 .weeklyTasksEvents {
   padding-top: 20px;
   display: flex;
