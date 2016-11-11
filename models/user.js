@@ -2,10 +2,10 @@ const router = require('express').Router();
 const config = require('../db/connections.js');
 const knex = require('knex')(config.development);
 
-// @TODO is it good to set a Promise?
-
+// find user in the DB by ID Number
 function findById(googleID, accessToken, refreshToken) {
   return new Promise(function (resolve, reject) {
+
     knex.select()
     .from('task_users')
     .where('googleid', googleID)
@@ -18,6 +18,7 @@ function findById(googleID, accessToken, refreshToken) {
   });
 };
 
+// create new user in DB after user is not found by ID
 function create(googleID, accessToken, refreshToken) {
   return new Promise(function (resolve, reject) {
 
@@ -34,15 +35,14 @@ function create(googleID, accessToken, refreshToken) {
       });
 };
 
+// update access and refresh tokens in the DB
 function updateTokens(googleID, accessToken, refreshToken) {
-
   return new Promise(function (resolve, reject) {
 
     knex('task_users').where('googleid', googleID)
                       .update({ accesstoken: accessToken, refreshtoken: refreshToken })
                       .returning('*')
                       .then(function (response) {
-                        console.log('update response', response);
                         resolve(response);
                       }).catch(function (err) {
                         console.log('Error Querying the DB', err);
@@ -52,6 +52,7 @@ function updateTokens(googleID, accessToken, refreshToken) {
   });
 };
 
+// export the three functions
 module.exports = {
   findById: findById,
   create: create,
