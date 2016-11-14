@@ -14,8 +14,11 @@ function tasksService($http) {
 
   // get tasks from the DB
   that.getTasks = function () {
+    // current date
+    var today = moment().format('L');
+    console.log('today', today);
 
-    return $http.get('/tasks')
+    return $http.get('/tasks', { params: { currentDay: today } })
          .then(changeTasksDate, errorCallback);
   };
 

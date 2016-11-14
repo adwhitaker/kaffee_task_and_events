@@ -14,10 +14,12 @@ router.route('/:id')
 // get tasks from the DB
 function getTasks(req, res) {
   var userID = req.user.id;
+  var today = req.query.currentDay;
 
   knex.select()
       .from('task_items')
       .where('item_creater', userID)
+      .andWhere('start_date', '<=', today)
       .orderBy('id')
       .then(function (data) {
         res.send(data);
