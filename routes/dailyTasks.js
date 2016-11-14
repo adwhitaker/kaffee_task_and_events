@@ -38,7 +38,6 @@ function addDailyTask(req, res) {
   console.log('dailyTask', dailyTask);
   knex.insert(dailyTask).into('task_daily')
       .then(function (response) {
-        console.log('response', response);
         res.sendStatus(200);
       }).catch(function (err) {
         console.log('Error Querying the DB', err);
@@ -64,7 +63,6 @@ function updateDailyTask(req, res) {
   knex('task_daily').where('id', id)
              .update(dailyTask)
              .then(function (response) {
-              console.log('update response', response);
               res.sendStatus(200);
             }).catch(function (err) {
               console.log('Error Querying the DB', err);
