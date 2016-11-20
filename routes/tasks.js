@@ -43,11 +43,12 @@ function postTask(req, res) {
                         start_date: startDate,
                         end_date: endDate, };
 
-  knex('task_items').insert(insertRequest).then(function () {
-    res.sendStatus(200);
-  }).catch(function (err) {
-    console.log('Error Querying the DB', err);
-  });
+  knex('task_items').insert(insertRequest)
+                    .then(function () {
+                      res.sendStatus(200);
+                    }).catch(function (err) {
+                      console.log('Error Querying the DB', err);
+                    });
 };
 
 // update task in the DB
@@ -66,12 +67,12 @@ function updateTask(req, res) {
                         end_date: endDate, };
 
   knex('task_items').where('id', id)
-               .update(insertRequest)
-               .then(function (response) {
-                res.sendStatus(200);
-              }).catch(function (err) {
-                console.log('Error Querying the DB', err);
-              });
+                    .update(insertRequest)
+                    .then(function (response) {
+                      res.sendStatus(200);
+                    }).catch(function (err) {
+                      console.log('Error Querying the DB', err);
+                    });
 };
 
 // delete task from the DB
@@ -79,12 +80,12 @@ function deleteTask(req, res) {
   var id = req.params.id;
 
   knex('task_items').where('id', id)
-               .delete()
-               .then(function () {
-                  res.sendStatus(204);
-                }).catch(function (err) {
-                  console.log('Error Querying the DB', err);
-                });
+                    .delete()
+                    .then(function () {
+                      res.sendStatus(204);
+                    }).catch(function (err) {
+                      console.log('Error Querying the DB', err);
+                    });
 };
 
 module.exports = router;
