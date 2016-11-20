@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -5,6 +6,8 @@ const GoogleStrategy = require('passport-google-oauth2');
 const path = require('path');
 const auth = require('./auth/setup');
 const session = require('express-session');
+
+const sessionConfig = require('./auth/sessionConfig');
 const googleAuth = require('./routes/googleAuth');
 const googleCalendar = require('./routes/googleCalendar');
 const tasks = require('./routes/tasks');
@@ -13,20 +16,9 @@ const logout = require('./routes/logout');
 
 var app = express();
 
-const sessionConfig = {
-  secret: 'super secret',
-  key: 'user',
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 30 * 60 * 1000,
-    secure: false,
-  },
-};
-
 // middleware
 auth.setup();
-app.use(session(sessionConfig));
+app.use(session(sessionConfig.sessionConfig));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -50,6 +42,7 @@ app.get('/*', function (req, res) {
 });
 
 // server connection
-var server = app.listen(3000, function () {
-  console.log('Listening on port', server.address().port);
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log('Listening on port', port);
 });
