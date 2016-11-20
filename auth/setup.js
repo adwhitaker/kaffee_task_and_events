@@ -1,7 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2');
 const User = require('../models/user');
-const authorization = require('../db/auth');
 
 exports.setup = function () {
   // used to serialize the user for the session
@@ -20,11 +19,11 @@ exports.setup = function () {
   });
 
   passport.use(new GoogleStrategy({
-    authorizationURL: authorization.googleAuth.authorizationURL,
-    tokenURL: authorization.googleAuth.tokenURL,
-    clientID: authorization.googleAuth.clientID,
-    clientSecret: authorization.googleAuth.clientSecret,
-    callbackURL: authorization.googleAuth.callbackURL,
+    authorizationURL: process.env.AUTHORIZATION_URL,
+    tokenURL: process.env.TOKEN_URL,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL,
   },
   function (accessToken, refreshToken, profile, cb) {
     findOrCreate(profile.id, accessToken, refreshToken, function (err, user) {
