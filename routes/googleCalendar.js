@@ -3,14 +3,13 @@ const passport = require('passport');
 var google = require('googleapis');
 var plus = google.plus('v1');
 var OAuth2 = google.auth.OAuth2;
-const auth = require('../db/auth');
 var calendar = google.calendar('v3');
 
 // new OAuth2 client setup
 var oauth2Client = new OAuth2(
-  auth.googleAuth.clientID,
-  auth.googleAuth.clientSecret,
-  auth.googleAuth.callbackURL
+  process.env.clientID,
+  process.env.clientSecret,
+  process.env.callbackURL
 );
 
 // router to get events from Calendar
