@@ -46,7 +46,7 @@ function postTask(req, res) {
   knex('task_items').insert(insertRequest).then(function () {
     res.sendStatus(200);
   }).catch(function (err) {
-    console.log(err);
+    console.log('Error Querying the DB', err);
   });
 };
 
@@ -69,6 +69,8 @@ function updateTask(req, res) {
                .update(insertRequest)
                .then(function (response) {
                 res.sendStatus(200);
+              }).catch(function (err) {
+                console.log('Error Querying the DB', err);
               });
 };
 
@@ -81,9 +83,8 @@ function deleteTask(req, res) {
                .then(function () {
                   res.sendStatus(204);
                 }).catch(function (err) {
-                  console.log(err);
-                  res.sendStatus(500);
-                });;
+                  console.log('Error Querying the DB', err);
+                });
 };
 
 module.exports = router;
