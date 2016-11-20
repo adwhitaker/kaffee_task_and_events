@@ -13,12 +13,16 @@ router.route('/:id')
 function getDailyTask(req, res) {
   var userID = req.user.id;
 
-  knex.select().from('task_daily').where('item_creator', userID).orderBy('id').then(function (response) {
-    res.send(response);
-  }).catch(function (err) {
-    console.log('Error Querying the DB', err);
-    res.send(err);
-  });
+  knex.select()
+      .from('task_daily')
+      .where('item_creator', userID)
+      .orderBy('id')
+      .then(function (response) {
+        res.send(response);
+      }).catch(function (err) {
+        console.log('Error Querying the DB', err);
+        res.send(err);
+      });
 };
 
 function addDailyTask(req, res) {
@@ -35,8 +39,8 @@ function addDailyTask(req, res) {
                         item2: item2,
                       };
 
-  console.log('dailyTask', dailyTask);
-  knex.insert(dailyTask).into('task_daily')
+  knex.insert(dailyTask)
+      .into('task_daily')
       .then(function (response) {
         res.sendStatus(200);
       }).catch(function (err) {
