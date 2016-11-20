@@ -4,3 +4,7 @@ node_modules
 quickstart.js
 client_secret.json
 public/vendors
+Kaffee.pdf
+ProjectScope.docx
+Task Manager.docx
+.env
