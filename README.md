@@ -27,7 +27,7 @@ Kaffee allows the user to keep their personal tasks and Google Calendar events i
 - after cloning the project, run npm install in the terminal
 - PostgreSQL database setup information can be found in database.sql
 - in the Google Developer Console create a new project to use Google Calendar
-- enter the clientID and clientSecret in db/auth.js
+- enter the clientID and clientSecret in a new .env file
 - run npm start
 - go to localhost:3000 in a Chrome
 - press Control + C to quit npm
