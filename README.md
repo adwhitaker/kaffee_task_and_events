@@ -1,6 +1,8 @@
 # Kaffee (Task and Event Manager)
 Kaffee allows the user to keep their personal tasks and Google Calendar events in one place, allowing them to view what needs to be completed today and in the upcoming week.
 
+Kaffee can be viewed at: http://arcane-anchorage-79235.herokuapp.com/
+
 ## Features
 
 ### Daily Tasks
