@@ -21,7 +21,7 @@ CREATE TABLE task_daily (
 	id SERIAL PRIMARY KEY,
 	item1 varchar(50),
 	amount int,
-	item2 archer(50),
+	item2 varchar(50),
 	item_creator int REFERENCES task_users,
 	complete boolean
 );
