@@ -26,17 +26,16 @@ Kaffee can be viewed at: http://arcane-anchorage-79235.herokuapp.com/
 - everyday tasks can be completed by clicking on the box at the top of the page
 
 ## Running the Server
-- after cloning the project, run npm install in the terminal
+- after cloning the project, run `npm install` in the terminal
 - PostgreSQL database setup information can be found in database.sql
-- in the Google Developer Console create a new project to use Google Calendar
-- enter the clientID and clientSecret in a new .env file
-- run npm start
-- go to localhost:3000 in a Chrome
-- press Control + C to quit npm
+- in the Google Developer Console create a new project to use Google OAuth/Google Calendar
+- enter the AUTHORIZATION_URL, TOKEN_URL, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL, and SECRET in a new .env file
+- in the terminal, run `npm start`
+- go to localhost:3000 in a Chrome Browser
+- in the terminal, press Control + C to quit the server connection
 
 ## Stretch Goals
-- upload to Heroku
-- add Google Calendar
+- post to Google Calendar
 - page to view tasks set in the future
 - Fitbit OAuth setup/step counter display
 - edit events and personal tasks on weekly view
